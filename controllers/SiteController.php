@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\UserForm;
 
 class SiteController extends Controller
 {
@@ -122,4 +124,49 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionHello()
+    {
+        $name = 'Olvit';
+        return $this->render('hello', array('name' => $name));
+    }
+
+    public function actionUser()
+    {
+        $model = new UserForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            Yii::$app->session->setFlash('success', 'Введите коректные данные');
+
+        }
+            return $this->render('userForm', ['model' => $model]);
+        }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
